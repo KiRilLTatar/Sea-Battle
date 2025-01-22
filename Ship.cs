@@ -9,18 +9,18 @@ namespace SeaBattle2._0
         /// <summary>
         /// клетки корабля по координатам
         /// </summary>
-        public List<Cell> Cells { get; }
+        public List<Cell> CellsShip { get; }
 
         /// <summary>
         /// потоплен ли корабль
         /// </summary>
-        public bool IsSunk => Cells.All(cell => cell.IsShot);
+        public bool IsSunk => CellsShip.All(cell => cell.IsShot);
 
         public Ship(List<Cell> cells)
         {
-            Cells = cells;
+            CellsShip = cells;
 
-            foreach (var cell in Cells)
+            foreach (var cell in CellsShip)
             {
                 cell.IsShip = true;
             }
@@ -32,7 +32,7 @@ namespace SeaBattle2._0
         /// <param name="repeat"></param>
         public void ShotCell(int x, int y) // выстрел по клетке 
         {
-            var targetCell = Cells.FirstOrDefault(cell => cell.X == x && cell.Y == y);
+            var targetCell = CellsShip.FirstOrDefault(cell => cell.X == x && cell.Y == y);
 
             if (targetCell != null)
             {

@@ -17,7 +17,7 @@ namespace SeaBattle2._0
         private Visibility vis = Visibility.Hidden;
         public Visibility Visabile { 
             get => vis; 
-            private set
+            set
             {
                 vis = value;
                 OnPropertyChanged();

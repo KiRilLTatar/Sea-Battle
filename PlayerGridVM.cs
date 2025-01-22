@@ -18,9 +18,6 @@ namespace SeaBattle2._0
         /// Коллекция ячеек для отображения
         /// </summary>
         public CellVM[][] Cells { get; }
-        
-
-
 
         /// <summary>
         /// Размер игрового поля
@@ -29,19 +26,18 @@ namespace SeaBattle2._0
 
         public List<Ship> Ships { get; }
 
+
         public PlayerGridVM(PlayerGrid playerGrid)
         {
             this.playerGrid = playerGrid;
             Cells = new CellVM[Size][];
 
             for (int i = 0; i < Size; i++)
-            {
+            { 
                 Cells[i] = new CellVM[Size];
                 for (int j = 0; j < Size; j++)
                 {
-                    Cells[i][j] = new CellVM(playerGrid.Cells[i][j]);
-                    Console.WriteLine(playerGrid.Cells[i][j].GetCell());
-                    
+                    Cells[i][j] = new CellVM(playerGrid.CellsGrid[i][j]);              
                 }
             }
         }
@@ -59,6 +55,7 @@ namespace SeaBattle2._0
             foreach (var (x, y) in coordinates)
             {
                 Cells[x][y].IsShip = true;
+                Cells[x][y].Visabile = Visibility.Visible;
             }
                  
             return true;

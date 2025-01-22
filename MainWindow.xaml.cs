@@ -17,7 +17,7 @@ namespace SeaBattle2._0
 
         private void MouseKeyDownEnemy(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            tVM.point = ;
+            ;
         }
 
         private void MouseKeyDownPlayer(object sender, System.Windows.Input.MouseButtonEventArgs e)

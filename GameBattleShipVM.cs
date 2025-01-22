@@ -38,12 +38,13 @@ namespace SeaBattle2._0
 
             PlayerGrid playerGrid = new PlayerGrid(10);
             PlayerGrid enemyGrid = new PlayerGrid(10);
-/*            List<int x, int y> values = new List<int>()*/;
-            //playerGrid.PlaceShip( );
 
+            var shipPlayer = new List<(int x, int y)> { (0, 0), (0, 1), (0, 2) };
 
             PlayerCells = new PlayerGridVM(playerGrid);
             EnemyCells = new PlayerGridVM(enemyGrid);
+
+            PlayerCells.PlaceShip(shipPlayer);
 
         }
         

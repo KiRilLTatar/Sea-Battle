@@ -11,7 +11,7 @@ namespace SeaBattle2._0
         public int Size { get; }
 
         // само игровое поле
-        public Cell[][] Cells { get; }
+        public Cell[][] CellsGrid { get; }
 
         // список кораблей
         public List<Ship> Ships { get; }
@@ -19,15 +19,15 @@ namespace SeaBattle2._0
         public PlayerGrid(int size)
         {
             Size = size;
-            Cells = new Cell[size][];
+            CellsGrid = new Cell[size][];
             Ships = new List<Ship>();
 
             for (int x = 0; x < size; x++)
             {
-                Cells[x] = new Cell[size];
+                CellsGrid[x] = new Cell[size];
                 for (int y = 0; y < size; y++)
                 {
-                    Cells[x][y] = new Cell(x, y);
+                    CellsGrid[x][y] = new Cell(x, y);
                 }
             }
         }
@@ -48,12 +48,12 @@ namespace SeaBattle2._0
                     return false;
                 }
 
-                if (Cells[x][y].IsShip || HasShips(x, y))
+                if (CellsGrid[x][y].IsShip || HasShips(x, y))
                 {
                     return false; 
                 }
 
-                shipCells.Add(Cells[x][y]);
+                shipCells.Add(CellsGrid[x][y]);
             }
 
             var ship = new Ship(shipCells);
@@ -79,7 +79,7 @@ namespace SeaBattle2._0
                 int nx = x + dx[i];
                 int ny = y + dy[i];
 
-                if (IsValidCoordinate(nx, ny) && Cells[nx][ny].IsShip)
+                if (IsValidCoordinate(nx, ny) && CellsGrid[nx][ny].IsShip)
                 {
                     return true; 
                 }
@@ -103,7 +103,7 @@ namespace SeaBattle2._0
                 throw new ArgumentException("Некорректные координаты."); // выбрасываем ошибку
             }
 
-            var cell = Cells[x][y];
+            var cell = CellsGrid[x][y];
 
             if (cell.IsShot)
             {
@@ -150,5 +150,14 @@ namespace SeaBattle2._0
         //        Console.WriteLine();
         //    }
         //}
+
+
+        public List<(int x, int y)> GenerateShipOnGrid()
+        {
+            
+
+            return;
+        }
+        
     }
 }
