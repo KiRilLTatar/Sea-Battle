@@ -5,7 +5,7 @@ namespace SeaBattle2._0
     // игровые поля 
     internal class Game
     {
-        public PlayerGrid PlayerEnemy { get; }
+        public PlayerGrid PlayerCells { get; }
         public PlayerGrid EnemyCells { get; }
 
         public int CurrentPlayer { get; private set; }
@@ -16,7 +16,7 @@ namespace SeaBattle2._0
 
         public Game(int size)
         {
-            PlayerEnemy = new PlayerGrid(size);
+            PlayerCells = new PlayerGrid(size);
             EnemyCells = new PlayerGrid(size);
 
             CurrentPlayer = 1;
@@ -38,7 +38,7 @@ namespace SeaBattle2._0
                 throw new Exception("Игры законченна");
             }
 
-            var targetGrig = CurrentPlayer == 1 ? PlayerEnemy : EnemyCells;
+            var targetGrig = CurrentPlayer == 1 ? PlayerCells : EnemyCells;
 
             if (!targetGrig.Attack(x, y))
             {

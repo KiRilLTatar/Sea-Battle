@@ -43,25 +43,6 @@ namespace SeaBattle2._0
         }
 
         /// <summary>
-        /// Попытка разместить корабль на поле.
-        /// </summary>
-        /// <param name="coordinates">Список координат корабля.</param>
-        /// <returns>Успешно или нет.</returns>
-        public bool PlaceShip(List<(int X, int Y)> coordinates)
-        {
-            playerGrid.PlaceShip(coordinates);
-            
-
-            foreach (var (x, y) in coordinates)
-            {
-                Cells[x][y].IsShip = true;
-                Cells[x][y].Visabile = Visibility.Visible;
-            }
-                 
-            return true;
-        }
-
-        /// <summary>
         /// Атаковать клетку на игровом поле.
         /// </summary>
         /// <param name="x">Координата X.</param>

@@ -15,6 +15,8 @@ namespace SeaBattle2._0
         private readonly Cell cell;
 
         private Visibility vis = Visibility.Hidden;
+
+        private string color = "Red";
         public Visibility Visabile { 
             get => vis; 
             set
@@ -22,6 +24,16 @@ namespace SeaBattle2._0
                 vis = value;
                 OnPropertyChanged();
             } 
+        }
+
+        public string Color
+        {
+            get => color;
+            set
+            {
+                color = value;
+                OnPropertyChanged();
+            }
         }
 
         public int X => cell.X;
@@ -60,9 +72,15 @@ namespace SeaBattle2._0
             {
                 vis = Visibility.Hidden;
             }
+            else if (cell.GetCell() == ".")
+            {
+                vis = Visibility.Visible;
+                color = "White";
+            }
             else
             {
                 vis = Visibility.Visible;
+                color = "Red";
             }
         }
     }

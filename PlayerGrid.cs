@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Shapes;
 
 namespace SeaBattle2._0
 {
     // игровое поле
     internal class PlayerGrid
     {
+        private Random random = new Random();  
         // размер игрового поля
         public int Size { get; }
 
@@ -26,7 +28,7 @@ namespace SeaBattle2._0
             {
                 CellsGrid[x] = new Cell[size];
                 for (int y = 0; y < size; y++)
-                {
+                {               
                     CellsGrid[x][y] = new Cell(x, y);
                 }
             }
@@ -136,28 +138,90 @@ namespace SeaBattle2._0
         }
 
         // тестирование
-        //public void PrintBoard()
-        //{
-        //    for (int y = 0; y < Size; y++)
-        //    {
-        //        for (int x = 0; x < Size; x++)
-        //        {
-        //            var cell = Cells[x, y];
-        //            Console.Write(cell.IsDestroyed ? "X" :
-        //                          cell.IsShot ? "." :
-        //                          cell.IsShip ? "S" : "~");
-        //        }
-        //        Console.WriteLine();
-        //    }
-        //}
-
-
-        public List<(int x, int y)> GenerateShipOnGrid()
+        public void PrintBoard()
         {
-            
-
-            return;
+            for (int y = 0; y < Size; y++)
+            {
+                for (int x = 0; x < Size; x++)
+                {
+                    var cell = CellsGrid[x][y];
+                    Console.Write(cell.IsDestroyed ? "X" :
+                                  cell.IsShot ? "." :
+                                  cell.IsShip ? "S" : "~");
+                }
+                Console.WriteLine();
+            }
         }
-        
+
+        public void GenerationShip()
+        {
+            PlaceShipsGrid(4, 1);
+            PlaceShipsGrid(3, 2);
+            PlaceShipsGrid(2, 3);
+            PlaceShipsGrid(1, 4);
+        }
+
+        private void PlaceShipsGrid(int count, int size)
+        {
+            Random rand = new Random();
+            List<(int x, int y)> allShipsCoordinates = new List<(int x, int y)>();
+
+            for (int i = 0; i < count; i++)
+            {
+                bool placed = false;
+                while (!placed)
+                {
+                    int row = rand.Next(10);
+                    int col = rand.Next(10);
+                    bool horizontal = rand.Next(2) == 0;
+
+                    var shipCoordinates = GenerateShipCoordinates(row, col, size, horizontal);
+
+                    if (CanPlaceShip(CellsGrid, shipCoordinates))
+                    {
+                        PlaceShip(shipCoordinates);
+                        allShipsCoordinates.AddRange(shipCoordinates);
+                        placed = true;
+                    }
+                }
+            }
+        }
+
+
+        private List<(int x, int y)> GenerateShipCoordinates(int row, int col, int size, bool horizontal)
+        {
+            List<(int x, int y)> coordinates = new List<(int x, int y)>();
+            for (int i = 0; i < size; i++)
+            {
+                int r = row + (horizontal ? 0 : i);
+                int c = col + (horizontal ? i : 0);
+                coordinates.Add((r, c));
+            }
+            return coordinates;
+        }
+
+        private bool CanPlaceShip(Cell[][] field, List<(int x, int y)> coordinates)
+        {
+            foreach (var (r, c) in coordinates)
+            {
+                if (r < 0 || r >= 10 || c < 0 || c >= 10 || field[r][c].IsShip)
+                    return false;
+
+                // Проверка на соседние клетки
+                for (int dr = -1; dr <= 1; dr++)
+                {
+                    for (int dc = -1; dc <= 1; dc++)
+                    {
+                        int nr = r + dr;
+                        int nc = c + dc;
+                        if (nr >= 0 && nr < 10 && nc >= 0 && nc < 10 && field[nr][nc].IsShip)
+                            return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+
     }
 }

@@ -6,7 +6,7 @@ using System.Windows.Input;
 namespace SeaBattle2._0
 {
     class GameBattleShipVM : BaseViewModel
-    {
+    { 
         private TimerModel timer;
         private string time;
         public Point point;
@@ -38,13 +38,12 @@ namespace SeaBattle2._0
 
             PlayerGrid playerGrid = new PlayerGrid(10);
             PlayerGrid enemyGrid = new PlayerGrid(10);
-
-            var shipPlayer = new List<(int x, int y)> { (0, 0), (0, 1), (0, 2) };
+            playerGrid.GenerationShip();
+            enemyGrid.GenerationShip();
 
             PlayerCells = new PlayerGridVM(playerGrid);
             EnemyCells = new PlayerGridVM(enemyGrid);
 
-            PlayerCells.PlaceShip(shipPlayer);
 
         }
         
