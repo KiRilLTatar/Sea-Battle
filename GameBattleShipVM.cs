@@ -11,8 +11,28 @@ namespace SeaBattle2._0
     { 
         private TimerModel timer;
         private string time;
-        public Point pointE;
-        public Point pointP;
+
+        private string scorePlayer;
+        private string enemyPlayer;
+        public string ScorePlayer
+        {
+            get => scorePlayer;
+            set
+            {
+                scorePlayer = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string ElementScore
+        {
+            get => enemyPlayer;
+            set
+            {
+                enemyPlayer = value;
+                OnPropertyChanged();
+            }
+        }
 
         private bool isPlayerTurn = true;
         private bool gameOver = false;
@@ -55,6 +75,8 @@ namespace SeaBattle2._0
 
         public GameBattleShipVM()
         {
+            scorePlayer = $"Player: 0";
+            enemyPlayer = $"Computer: 0";
 
             timer = new TimerModel();
             timer.TimeElapsed += (s, e) => Timer = timer.Timer;
@@ -67,30 +89,46 @@ namespace SeaBattle2._0
             playerGrid.GenerationShip();
             enemyGrid.GenerationShip();
 
-            PlayerCells = new PlayerGridVM(playerGrid);
-            EnemyCells = new PlayerGridVM(enemyGrid);
+            PlayerCells = new PlayerGridVM(playerGrid, false);
+            EnemyCells = new PlayerGridVM(enemyGrid, true);
         }
 
         public void PlayerMove(Point target)
         {
-            if (!IsPlayerTurn || GameOver)
-                return;
-
-            if (!EnemyCells.Attack((int)target.X, (int)target.Y))
+            if (!timer.IsRunningTimer())
             {
                 return;
-            }
-
-            if (CheckVictory(EnemyCells))
-            {
-                GameOver = true;
-                MessageBox.Show("Вы выиграли!");
-                
             }
             else
             {
-                IsPlayerTurn = false;
-                EnemyMove(); 
+                if (!IsPlayerTurn || GameOver)
+                    return;
+
+                (bool, bool) chun = EnemyCells.Attack((int)target.X, (int)target.Y);
+
+                if (!chun.Item1)
+                {
+                    return;
+                }
+                if (chun.Item2) {
+                    int count = EnemyCells.CntSunkShip();
+                    ScorePlayer = $"Player: {(count).ToString()}";
+                }
+
+
+
+                if (CheckVictory(EnemyCells))
+                {
+                    GameOver = true;
+                    timer.Stop();
+                    MessageBox.Show("Вы выиграли!");
+
+                }
+                else
+                {
+                    IsPlayerTurn = false;
+                    EnemyMove();
+                }
             }
         }
 
@@ -110,7 +148,13 @@ namespace SeaBattle2._0
 
                 if (!cell.IsShot)
                 {
-                    PlayerCells.Attack((int)x, (int)y);
+                    (bool, bool) chun = PlayerCells.Attack((int)x, (int)y);
+
+                    if (chun.Item2)
+                    {
+                        int count = EnemyCells.CntSunkShip();
+                        ElementScore = $"Computer: {(count).ToString()}";
+                    }
                     if (cell.IsShip)
                     {
                         if (CheckVictory(PlayerCells))

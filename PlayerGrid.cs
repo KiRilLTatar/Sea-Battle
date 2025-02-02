@@ -131,7 +131,7 @@ namespace SeaBattle2._0
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        private bool IsValidCoordinate(int x, int y)
+        public bool IsValidCoordinate(int x, int y)
         {
             return x >= 0 && x < Size && y >= 0 && y < Size;
         }
@@ -179,7 +179,6 @@ namespace SeaBattle2._0
                     if (CanPlaceShip(CellsGrid, shipCoordinates))
                     {
                         PlaceShip(shipCoordinates);
-                        allShipsCoordinates.AddRange(shipCoordinates);
                         placed = true;
                     }
                 }

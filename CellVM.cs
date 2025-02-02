@@ -36,6 +36,17 @@ namespace SeaBattle2._0
                 OnPropertyChanged();
             }
         }
+        private bool isDestroyed = false;
+
+        public bool IsDestroyed
+        {
+            get => isDestroyed;
+            set
+            {
+                isDestroyed = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int X => cell.X;
         public int Y => cell.Y;
@@ -66,19 +77,37 @@ namespace SeaBattle2._0
             }
         }
 
-        public CellVM(Cell cell)
+        public CellVM(Cell cell, bool LRgrid)
         {
             this.cell = cell;
-            if (cell.GetCell() == "~")
+            if (LRgrid)
             {
-                vis = Visibility.Collapsed;
-                color = "White";
-            }
+                if (cell.GetCell() == "~")
+                {
+                    vis = Visibility.Collapsed;
+                    color = "White";
+                }
+                else
+                {
+                    vis = Visibility.Collapsed;
+                    color = "Red";
+                }
+            } 
             else
             {
-                vis = Visibility.Visible;
-                color = "Red";
+                if (cell.GetCell() == "~") 
+                {
+                    vis = Visibility.Collapsed;
+                    color = "White";
+                }
+                else
+                {
+                    vis = Visibility.Visible;
+                    color = "Red";
+                }
             }
+
+
         }
 
         public void Shot()

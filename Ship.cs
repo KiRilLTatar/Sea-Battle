@@ -29,21 +29,6 @@ namespace SeaBattle2._0
         /// <summary>
         /// Данный метод производит выстрел по клетке и изменяет её состояние на пораженное
         /// </summary>
-        /// <param name="repeat"></param>
-        public void ShotCell(int x, int y) // выстрел по клетке 
-        {
-            var targetCell = CellsShip.FirstOrDefault(cell => cell.X == x && cell.Y == y);
-
-            if (targetCell != null)
-            {
-                targetCell.Shot();
-            }
-        }
-
-
-        /// <summary>
-        /// Данный метод производит выстрел по клетке и изменяет её состояние на пораженное
-        /// </summary>
         /// <param name="repeat">Сколько раз передать привет</param>
         /// <returns>Потоплен или повреждён</returns>
         public string GetStatus() // получение статуса корабля

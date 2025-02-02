@@ -27,10 +27,17 @@ namespace SeaBattle2._0
             TimeElapsed?.Invoke(this, EventArgs.Empty);
 
             Timer = dt.ToString(@"mm\:ss");
-            Console.WriteLine(Timer);
         }
         
         public void Start() => timer.Start();
         public void Stop() => timer.Stop();
+
+        public bool IsRunningTimer()
+        {
+            if (timer.IsEnabled) return true;
+            return false;
+        }
     }
+
+
 }

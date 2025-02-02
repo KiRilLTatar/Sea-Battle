@@ -5,7 +5,7 @@ using System.Windows.Input;
 namespace SeaBattle2._0
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Ошибка  в работе таймера при остановке
     /// </summary>
     public partial class MainWindow : Window
     {
