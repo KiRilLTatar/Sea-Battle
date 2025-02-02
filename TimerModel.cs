@@ -16,7 +16,7 @@ namespace SeaBattle2._0
         {
             starttime = DateTime.Now;
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Interval = TimeSpan.FromMilliseconds(1000);
             timer.Tick += Timer_Tick;
         }
 
@@ -27,6 +27,7 @@ namespace SeaBattle2._0
             TimeElapsed?.Invoke(this, EventArgs.Empty);
 
             Timer = dt.ToString(@"mm\:ss");
+            Console.WriteLine(Timer);
         }
         
         public void Start() => timer.Start();

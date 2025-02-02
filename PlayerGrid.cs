@@ -8,7 +8,6 @@ namespace SeaBattle2._0
     // игровое поле
     internal class PlayerGrid
     {
-        private Random random = new Random();  
         // размер игрового поля
         public int Size { get; }
 

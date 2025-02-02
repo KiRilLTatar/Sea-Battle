@@ -156,7 +156,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderThickness="1" BorderBrush="White" Background="#0AAA"
-                                Width="30" Height="30" MouseLeftButtonDown="MouseKeyDownEnemy">
+                                Width="30" Height="30" MouseLeftButtonDown="MouseKeyDownEnemy" Tag="{Binding}">
 
                                     <Ellipse Fill="{Binding Color}" Visibility="{Binding Visabile}" Width="8" Height="8"/>
                                 </Border>

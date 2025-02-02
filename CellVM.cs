@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace SeaBattle2._0
@@ -14,7 +15,7 @@ namespace SeaBattle2._0
     {
         private readonly Cell cell;
 
-        private Visibility vis = Visibility.Hidden;
+        private Visibility vis = Visibility.Collapsed;
 
         private string color = "Red";
         public Visibility Visabile { 
@@ -70,11 +71,7 @@ namespace SeaBattle2._0
             this.cell = cell;
             if (cell.GetCell() == "~")
             {
-                vis = Visibility.Hidden;
-            }
-            else if (cell.GetCell() == ".")
-            {
-                vis = Visibility.Visible;
+                vis = Visibility.Collapsed;
                 color = "White";
             }
             else
@@ -82,6 +79,24 @@ namespace SeaBattle2._0
                 vis = Visibility.Visible;
                 color = "Red";
             }
+        }
+
+        public void Shot()
+        {
+            cell.Shot();
+            IsShot = true;
+            if (cell.GetCell() == ".")
+            {
+                Color = "White";
+                Visabile = Visibility.Visible;
+            }
+            else
+            {
+                Color = "DarkRed";
+                Visabile = Visibility.Visible;
+
+            }
+
         }
     }
 }

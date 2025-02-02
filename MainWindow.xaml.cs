@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace SeaBattle2._0
 {
@@ -15,12 +17,17 @@ namespace SeaBattle2._0
             InitializeComponent();
         }
 
-        private void MouseKeyDownEnemy(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void MouseKeyDownEnemy(object sender, MouseButtonEventArgs e)
         {
-            ;
+            if (e.Source is Border border && border.Tag is CellVM cell)
+            {
+                int x = cell.X;
+                int y = cell.Y;
+                tVM.PlayerMove(new Point(x, y));
+            }
         }
 
-        private void MouseKeyDownPlayer(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void MouseKeyDownPlayer(object sender, MouseButtonEventArgs e)
         {
             ;
         }

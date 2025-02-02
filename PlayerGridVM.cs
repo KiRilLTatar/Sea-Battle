@@ -48,30 +48,30 @@ namespace SeaBattle2._0
         /// <param name="x">Координата X.</param>
         /// <param name="y">Координата Y.</param>
         /// <returns>Успешна ли атака.</returns>
-        //public bool Attack(int x, int y)
-        //{
-        //    var success = playerGrid.Attack(x, y);
+        public bool Attack(int x, int y)
+        {
+            var success = playerGrid.Attack(x, y);
 
-        //    if (success)
-        //    {
-        //        var cellViewModel = GetCellViewModel(x, y);
-        //        if (cellViewModel != null)
-        //        {
-        //            cellViewModel.IsShot = true;
-        //        }
-        //    }
+            if (success)
+            {
+                var cellVM = Cells[x][y];
+                if (cellVM != null)
+                {
+                    cellVM.Shot();
+                }
+            }
 
-        //    return success;
-        //}
+            return success;
+        }
 
         /// <summary>
         /// Проверка, потоплены ли все корабли.
         /// </summary>
         /// <returns>True, если все корабли потоплены.</returns>
-        //public bool AreAllShipsSunk()
-        //{
-        //    return playerGrid.AreAllShipsSunk();
-        //}
+        public bool AreAllShipsSunk()
+        {
+            return playerGrid.AreAllShipsSunk();
+        }
 
         /// <summary>
         /// Получение ViewModel ячейки по координатам.
